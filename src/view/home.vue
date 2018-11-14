@@ -55,31 +55,17 @@
             <!--<span></span>-->
           </div>
           <ul class="content_list">
-            <li class="content_item" v-for="item in projectList"
-                :style="{background: '#a1a2a9 url('+item.bj+') no-repeat 50% 50%'}">
-              <!--  <div class="Img">
-                  <a href="http://www.baidu.com" target="_blank">
-                    <img src="../assets/1.jpg" alt="">
-                  </a>
-                </div>
-                <div class="item_title">
-                  title title title title
-                </div>
-                <div class="item_content">
-                  Join us to learn how Firebase helps mobile app teams of all sizes across the entire development
-                  lifecycle.
-                </div>
-                &lt;!&ndash;      <div class="item_more">
-                        LEARN MORE
-                      </div>&ndash;&gt;
-                <div></div>-->
-              <h4 class="item_title" :style="{color:item.color,}">{{item.name}}</h4>
-              <a :href="item.url" target="_blank">
-                <div class="item_box"
-                     :style="{border:' 2px solid'+item.color,color:item.color}"
-                     @mouseover="item.color = '#e4e4e4' "
-                     @mouseout="hoverOut(item)"
-                >
+            <!--<li class="content_item" v-for="item in projectList" :style="{background: '#a1a2a9 url('+item.bj+') no-repeat 50% 50%'}">-->
+            <li class="content_item" v-for="item in projectList" :class="{active : item.isactive}"
+                @mouseover="item.isactive =true"
+                @mouseout="item.isactive = false">
+              <img :src="item.bj" alt="" class="icon_logo">
+              <h4 class="item_title">{{item.name}}</h4>
+              <a :href="item.url" target="_blank" class="border_a">
+                <!--   <div class="item_box"
+                        :style="{border:' 2px solid'+item.color,color:item.color}"
+                   >-->
+                <div class="item_box">
                   访问链接
                 </div>
               </a>
@@ -133,8 +119,7 @@
   /**
    * 背景
    * */
-  import bj from "../assets/bj.jpg"
-
+  import bj from "../assets/bj.png"
 
   export default {
     name: "home",
@@ -201,19 +186,22 @@
             name: "GitHub",
             bj: bj,
             url: "https://github.com/intervalue",
-            color: "#86e991",
+            // color: "#86e991",
+            isactive: false,
           },
           {
             name: "技术文档",
             bj: bj,
             url: "https://github.com/intervalue",
-            color: "#007bff",
+            // color: "#007bff",
+            isactive: false,
           },
           {
             name: "开发论坛",
             bj: bj,
             url: "https://github.com/intervalue",
-            color: "#beeb00",
+            // color: "#beeb00",
+            isactive: false,
           },
         ]
       }
@@ -222,6 +210,8 @@
       hoverOut(item) {
         if (item.name === 'GitHub') {
           item.color = "#86e991"
+
+
         } else if (item.name === '技术文档') {
           item.color = "#007bff"
         } else if (item.name === '开发论坛') {
@@ -233,6 +223,18 @@
 </script>
 
 <style scoped lang="scss">
+  $text-color: #333; // 文字初始颜色
+  $text-active-color: #2386D7; // 文字选中颜色
+
+  $font-size-small: 16px; // 小号 字体
+  $font-size-big: 24px; //大号字体
+
+  $bj-color: #f3f3f3; // 背景色
+
+  $border-color: #E5E5E5; // 边框色
+
+  $color_b: #fff;
+
   .view {
     display: flex;
     flex-direction: column;
@@ -240,9 +242,9 @@
     .header {
       border-bottom: 1px solid #ddd;
       .container {
-        width: 1140px;
+        width: 980px;
         margin: 0 auto;
-        height: 80px;
+        height: 72px;
         display: flex;
         align-items: center;
         .logo {
@@ -264,24 +266,9 @@
       overflow: auto;
       display: flex;
       flex-direction: column;
-      /*   .title {
-           padding: 40px 0;
-           text-align: center;
-           box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-           .container {
-             width: 1140px;
-             margin: 0 auto;
-             h4 {
-               margin: 20px 0;
-               !*font-size: 24px;*!
-               font: 400 44px/52px Microsoft YaHei, sans-serif;
-               letter-spacing: 8px;
-             }
-           }
-         }*/
       .content {
-        min-height: 900px;
-        background: #efefef;
+        /*min-height: 900px;*/
+        background: $bj-color;
         flex: 1;
         .content_title {
           display: flex;
@@ -296,58 +283,56 @@
         .content_list {
           display: flex;
           flex-wrap: wrap;
-          align-items: end;
           .content_item {
-            width: 50%;
-            margin: 10px;
+            height: 520px;
             flex: 1;
-            box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-            /*  .Img {
-                img {
-                  vertical-align: middle;
-                  width: 100%;
-                  height: 366px;
-                }
-              }
-              .item_title {
-                color: cornflowerblue;
-                font-size: 22px;
-                margin: 10px 0;
-                padding-left: 20px;
-              }
-              .item_content {
-                padding: 16px;
-                line-height: 28px;
-              }
-              .item_more {
-              }*/
-
-            padding: 50px 40px;
             text-align: center;
-            background: #a1a2a9 url("../assets/bj.jpg") no-repeat 50% 50%;
-
+            border: 1px solid $border-color;
+            background: #fff;
+            cursor: pointer;
             .item_title {
-              margin-top: 80px;
-              font-size: 48px;
-              height: 64px;
-              line-height: 64px;
-              /*color: #86e991;*/
+              margin-top: 40px;
+              margin-bottom: 60px;
+              color: $text-color;
+              font-size: $font-size-big;
+              /*height: 64px;*/
             }
-            .item_box {
+            .border_a {
               display: inline-block;
-              /*border: 2px solid #86e991;*/
-              margin: 50px 0;
-              line-height: 40px;
-              font-size: 24px;
-              width: 300px;
-              /*color: #86e991;*/
+              width: 260px;
+              height: 46px;
+              border: 1px solid $border-color;
+              font-size: $font-size-small;
+              line-height: 46px;
+              /* .item_box {
+                 display: block;
+                 width: 260px;
+                 height: 46px;
+                 margin: 50px 0;
+                 line-height: 46px;
+                 font-size: $font-size-small;
+               }*/
+            }
+            .icon_logo {
+              margin-top: 136px;
+              width: 88px;
+              height: 86px;
+            }
+            .item_box{
+              color: $text-color;
             }
           }
-          .github {
-          }
-          .word {
-          }
-          .forum {
+          .active {
+            background: $text-active-color;
+            .item_title {
+              color: $color_b;
+            }
+            .border_a {
+              border: 1px solid $color_b;
+            }
+            .item_box{
+              color: $color_b;
+            }
           }
         }
       }
@@ -411,7 +396,7 @@
   }
 
   .container {
-    width: 1140px;
+    width: 980px;
     margin: 0 auto;
   }
 </style>

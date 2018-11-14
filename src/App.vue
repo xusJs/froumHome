@@ -19,7 +19,6 @@
      color: #2c3e50;
      margin-top: 60px;*/
     height: 100%;
-    min-width: 1140px;
   }
 
   /*css 初始化*/
@@ -43,8 +42,8 @@
   }
 
   body, html {
-    /*line-height: 1;*/
     height: 100%;
+    /*min-width: 1140px*/
   }
 
   a {
